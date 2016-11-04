@@ -107,6 +107,7 @@ public:
             const Entry     search(const std::string &key);
             void            dump(std::ostream &os, DumpFlag flag);
 private:
+            std::unordered_map<std::string, std::string> entries;
 };
 
 class ChainedMap : public Map {
@@ -117,6 +118,7 @@ public:
 
 private:
             void            resize(const size_t new_size);
+            StringHasher    hfunc;
 };
 
 class OpenMap : public Map {
@@ -128,6 +130,7 @@ public:
 private:
             size_t          locate(const std::string &key);
             void            resize(const size_t new_size);
+            StringHasher    hfunc;
 };
 
 // vim: set sts=4 sw=4 ts=8 expandtab ft=cpp:
