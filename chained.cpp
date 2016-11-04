@@ -37,7 +37,14 @@ const Entry     ChainedMap::search(const std::string &key) {
 }
 
 void            ChainedMap::dump(std::ostream &os, DumpFlag flag) {
-    
+//    for (auto entry : entries) {
+//        switch (flag) {
+//            case DUMP_KEY:          os << entry.first  << std::endl; break;
+//            case DUMP_VALUE:        os << entry.second << std::endl; break;
+//            case DUMP_KEY_VALUE:    os << entry.first  << "\t" << entry.second << std::endl; break;
+//            case DUMP_VALUE_KEY:    os << entry.second << "\t" << entry.first  << std::endl; break;
+//        }
+//    }
 }
 
 void            ChainedMap::resize(const size_t new_size) {

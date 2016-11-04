@@ -36,10 +36,14 @@ void parse_command_line_options(int argc, char *argv[], Map *&map, DumpFlag &fla
                     map = new TreapMap();
                 } else if (strcasecmp(optarg, "unordered") == 0) {
                   map = new UnorderedMap();
-                } else if (strcasecmp(optarg, "chained") == 0) {
-                  map = new ChainedMap();
-                } else if (strcasecmp(optarg, "open") == 0) {
-                  map = new OpenMap();
+                } else if (std::string(optarg).find("chained") != std::string::npos) {
+                  if (std::string(optarg).length() == 11)
+                    loadfact = std::stod(std::string(optarg).substr(9,11));
+                  map = new ChainedMap(loadfact);
+                } else if (std::string(optarg).find("open") != std::string::npos) {
+                  if (std::string(optarg).length() == 7)
+                    loadfact = std::stod(std::string(optarg).substr(5,7));
+                  map = new OpenMap(loadfact);
                 } else {
                     usage(1);
                 }
