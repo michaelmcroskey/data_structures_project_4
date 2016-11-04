@@ -7,3 +7,5 @@ libmap.a
 map_bench
 map_test
 frequencies
+!benchmark_table.sh
+!timeout.sh
