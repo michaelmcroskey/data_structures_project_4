@@ -19,14 +19,14 @@ typedef std::chrono::high_resolution_clock  Clock;
 
 void usage(int status) {
     std::cout << "usage: map_bench" << std::endl
-              << "    -b BACKEND    Which Map backend (unsorted, sorted, bst, rbtree, treap)" << std::endl
+              << "    -b BACKEND    Which Map backend (unsorted, sorted, bst, rbtree, treap, unordered, chained, open)" << std::endl
               << "    -n NITEMS     Number of items to benchmark" << std::endl
               << "    -p PADLENGTH  Amount to pad the keys with leading 0's" << std::endl;
 
     exit(status);
 }
 
-void parse_command_line_options(int argc, char *argv[], Map *&map, int &nitems, int &padlength) {
+void parse_command_line_options(int argc, char *argv[], Map *&map, int &nitems, int &padlength, double &loadfact) {
     int c;
 
     while ((c = getopt(argc, argv, "hb:n:p:")) != -1) {
@@ -42,6 +42,16 @@ void parse_command_line_options(int argc, char *argv[], Map *&map, int &nitems, 
                     map = new RBTreeMap();
                 } else if (strcasecmp(optarg, "treap") == 0) {
                     map = new TreapMap();
+                } else if (strcasecmp(optarg, "unordered") == 0) {
+                  map = new UnorderedMap();
+                } else if (std::string(optarg).find("chained") != std::string::npos) {
+                  if (std::string(optarg).length() == 11)
+                    loadfact = std::stod(std::string(optarg).substr(9,11));
+                  map = new ChainedMap(loadfact);
+                } else if (std::string(optarg).find("open") != std::string::npos) {
+                  if (std::string(optarg).length() == 7)
+                    loadfact = std::stod(std::string(optarg).substr(5,7));
+                  map = new OpenMap(loadfact);
                 } else {
                     usage(1);
                 }
@@ -79,8 +89,9 @@ int main(int argc, char *argv[]) {
     Map *map       = nullptr;
     int  nitems    = 1;
     int  padlength = 1;
+    double loadfact = 0.9;
 
-    parse_command_line_options(argc, argv, map, nitems, padlength);
+    parse_command_line_options(argc, argv, map, nitems, padlength, loadfact);
 
     // Insert
     auto insert_start = Clock::now();
