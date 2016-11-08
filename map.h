@@ -140,6 +140,10 @@ private:
             size_t          locate(const std::string &key);
             void            resize(const size_t new_size);
             StringHasher    hfunc2;
+            Entry * table;
+            int tsize;
+            int lfactor;
+            int n_items;
 };
 
 // vim: set sts=4 sw=4 ts=8 expandtab ft=cpp:
