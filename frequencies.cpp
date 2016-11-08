@@ -18,7 +18,7 @@ void usage(int status) {
     exit(status);
 }
 
-void parse_command_line_options(int argc, char *argv[], Map *&map, DumpFlag &flag) {
+void parse_command_line_options(int argc, char *argv[], Map *&map, DumpFlag &flag, int &padlength, double &loadfact) {
     int c;
 
     while ((c = getopt(argc, argv, "hb:d:")) != -1) {
@@ -85,8 +85,10 @@ int main(int argc, char *argv[]) {
     Map *map = nullptr;
     DumpFlag flag = DUMP_VALUE_KEY;
     std::string word;
+    int  padlength = 1;
+    double loadfact = 0.9;
 
-    parse_command_line_options(argc, argv, map, flag);
+    parse_command_line_options(argc, argv, map, flag, padlength, loadfact);
 
     // Read input from STDIN
     while (std::cin >> word) {

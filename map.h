@@ -11,6 +11,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <unordered_set>
 
 // Type definitions ------------------------------------------------------------
 
@@ -120,7 +121,7 @@ public:
 
 private:
             void            resize(const size_t new_size);
-            std::map<std::string, std::string> entries;
+            std::map<std::string, std::string> *table;
             StringHasher    hfunc;
             int             tsize;
             int             lfactor;
@@ -138,7 +139,7 @@ public:
 private:
             size_t          locate(const std::string &key);
             void            resize(const size_t new_size);
-            StringHasher    hfunc;
+            StringHasher    hfunc2;
 };
 
 // vim: set sts=4 sw=4 ts=8 expandtab ft=cpp:

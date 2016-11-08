@@ -4,16 +4,22 @@
 
 #include <stdexcept>
 
+#define DEBUG false
+
 // Methods --------------------------------------------------------------------
 
 ChainedMap::ChainedMap(double load_factor, int size){
 //    lfactor = load_factor;
 //    tsize = size;
-//    entries = new std::map<std::string, std::string>[tsize];
+//
+//	table = new std::map<std::string, std::string>[size];
+//	
+//	StringHasher hfunc;
+//	if (DEBUG) std::cout << "Constructor success" << std::endl;
 }
 
 ChainedMap::~ChainedMap(){
-    
+    delete [] table; 
 }
 
 void            ChainedMap::insert(const std::string &key, const std::string &value) {
@@ -25,39 +31,52 @@ void            ChainedMap::insert(const std::string &key, const std::string &va
 //    } 
 //    
 //    int bucket = hfunc(key);
-//    //int bucket = key % tsize;
-//    	entries[bucket].insert(value);
+//    	table[bucket][key] = value;
+//	if (DEBUG) std::cout << "Insert success" << std::endl;
 }
+
+//	table 				= array of map<key, value>
+//	table[bucket] 		= map<key,value> 
+//	table[bucket][key] 	= value;
 
 const Entry     ChainedMap::search(const std::string &key) {
 //    int bucket = hfunc(key);
-//    //int bucket = key % tsize;
-//    	return entries[bucket].count(key);
+//	return std::make_pair(table[bucket].first, table[bucket][key]);
+//	if (DEBUG) std::cout << "Search fail" << std::endl;
 //    return NONE;
 }
 
 void            ChainedMap::dump(std::ostream &os, DumpFlag flag) {
-//    for (auto entry : entries) {
-//        switch (flag) {
-//            case DUMP_KEY:          os << entry.first  << std::endl; break;
-//            case DUMP_VALUE:        os << entry.second << std::endl; break;
-//            case DUMP_KEY_VALUE:    os << entry.first  << "\t" << entry.second << std::endl; break;
-//            case DUMP_VALUE_KEY:    os << entry.second << "\t" << entry.first  << std::endl; break;
-//        }
+//    for (auto bucket : table) {
+//		for (auto entry : bucket){
+//			switch (flag) {
+//				case DUMP_KEY:          os << entry.first  << std::endl; break;
+//				case DUMP_VALUE:        os << entry.second << std::endl; break;
+//				case DUMP_KEY_VALUE:    os << entry.first  << "\t" << entry.second << std::endl; break;
+//				case DUMP_VALUE_KEY:    os << entry.second << "\t" << entry.first  << std::endl; break;
+//				if (DEBUG) std::cout << "Dump success" << std::endl;
+//			 }
+//		}
 //    }
 }
 
 void            ChainedMap::resize(const size_t new_size) {
-//    // allocate new table of size new_size
-//    std::map<std::string, std::string>[new_size] newtable;
+//	if (DEBUG) std::cout << "Resize function" << std::endl;
 //    
+//	// allocate new table of size new_size
+//	new std::map<std::string, std::string> newtable[new_size];
+//
+//	for (auto bucket : table){
+//		for (auto entry : bucket){
+//			int newbucket = hfunc(entry);
+//			newtable[newbucket][entry.first] = entry.second;
+//		}
+//	}
+//	
 //    // copy all entries from old table to new table
-//    for (auto entry : entries){
-//        
-//    }
-//    
-//    // deallocate old table
-//    
+//	entries = newtable;
+//	
+//	tsize = new_size;
 }
 
 // vim: set sts=4 sw=4 ts=8 expandtab ft=cpp:
