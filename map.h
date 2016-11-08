@@ -125,7 +125,7 @@ private:
             StringHasher    hfunc;
             size_t          tsize;
             int             lfactor;
-            int             n_items;
+            size_t          n_items;
 };
 
 class OpenMap : public Map {
@@ -143,7 +143,7 @@ private:
             Entry * table;
             size_t tsize;
             int lfactor;
-            int n_items;
+            size_t n_items;
 };
 
 // vim: set sts=4 sw=4 ts=8 expandtab ft=cpp:
