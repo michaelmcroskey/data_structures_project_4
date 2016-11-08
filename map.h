@@ -113,7 +113,7 @@ private:
 
 class ChainedMap : public Map {
 public:
-                            ChainedMap(double load_factor = DEFAULT_LOAD_FACTOR, int size = DEFAULT_TABLE_SIZE);
+                            ChainedMap(double load_factor = DEFAULT_LOAD_FACTOR, size_t size = DEFAULT_TABLE_SIZE);
                             ~ChainedMap();
             void            insert(const std::string &key, const std::string &value);
             const Entry     search(const std::string &key);
@@ -123,14 +123,14 @@ private:
             void            resize(const size_t new_size);
             std::map<std::string, std::string> *table;
             StringHasher    hfunc;
-            int             tsize;
+            size_t          tsize;
             int             lfactor;
             int             n_items;
 };
 
 class OpenMap : public Map {
 public:
-                            OpenMap(double load_factor = DEFAULT_LOAD_FACTOR, int size = DEFAULT_TABLE_SIZE);
+                            OpenMap(double load_factor = DEFAULT_LOAD_FACTOR, size_t size = DEFAULT_TABLE_SIZE);
                             ~OpenMap();
             void            insert(const std::string &key, const std::string &value);
             const Entry     search(const std::string &key);
@@ -141,7 +141,7 @@ private:
             void            resize(const size_t new_size);
             StringHasher    hfunc2;
             Entry * table;
-            int tsize;
+            size_t tsize;
             int lfactor;
             int n_items;
 };

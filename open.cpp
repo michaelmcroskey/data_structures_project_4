@@ -8,12 +8,12 @@
 
 // Methods --------------------------------------------------------------------
 
-OpenMap::OpenMap(double load_factor, int size){
+OpenMap::OpenMap(double load_factor, size_t size){
     lfactor = load_factor;
     tsize = size;
     n_items = 0;
     table = new Entry[tsize];
-    for(int i=0;i<tsize;i++)
+    for(size_t i=0;i<tsize;i++)
         table[i] = NONE;   
 
 
@@ -54,7 +54,7 @@ const Entry     OpenMap::search(const std::string &key) {
 }
 
 void            OpenMap::dump(std::ostream &os, DumpFlag flag) {
-    for (int i=0;i<tsize;i++)
+    for (size_t i=0;i<tsize;i++)
         if(table[i] != NONE)
             switch (flag) {
                 case DUMP_KEY:          os << table[i].first  << std::endl; break;

@@ -12,7 +12,7 @@
 
 // Methods --------------------------------------------------------------------
 
-ChainedMap::ChainedMap(double load_factor_limit, int size){
+ChainedMap::ChainedMap(double load_factor_limit, size_t size){
     lfactor = load_factor_limit;
     tsize = size;
 	n_items = 0;
@@ -29,25 +29,21 @@ ChainedMap::~ChainedMap(){
 void            ChainedMap::insert(const std::string &key, const std::string &value) {
     n_items++;
     
-    if (n_items >= tsize){
-        int new_size = 2*tsize;
-        resize(new_size);
-    } 
+    if (n_items >= tsize)
+        resize(tsize*2);
 
 	double loadFactor = n_items / tsize;
-	if (loadFactor > lfactor){
-		int new_size = 2*tsize;
-		resize(new_size);
-	}
+	if (loadFactor > lfactor)
+		resize(2*tsize);
     
-    int bucket = hfunc(key) % tsize;
+    size_t bucket = hfunc(key) % tsize;
     	table[bucket][key] = value;
 
 	if (DEBUG) std::cout << "Inserted " << key << "::" << value << std::endl;
 }
 
 const Entry     ChainedMap::search(const std::string &key) {
-    int bucket = hfunc(key) % tsize;
+    size_t bucket = hfunc(key) % tsize;
 	if (table[bucket][key] != ""){
 		if (DEBUG) std::cout << "Search success" << std::endl;
 		return std::make_pair(key, table[bucket][key]);
@@ -58,7 +54,7 @@ const Entry     ChainedMap::search(const std::string &key) {
 }
 
 void            ChainedMap::dump(std::ostream &os, DumpFlag flag) {
-    for (int bucket = 0; bucket < tsize; bucket++){
+    for (size_t bucket = 0; bucket < tsize; bucket++){
 		for (auto entry : table[bucket]){
 			switch (flag) {
 				case DUMP_KEY:          os << entry.first  << std::endl; break;
@@ -77,7 +73,7 @@ void            ChainedMap::resize(const size_t new_size) {
 	// allocate new table of size new_size
 	auto newtable = new std::map<std::string, std::string>[new_size];
 	
-	for (int bucket = 0; bucket < tsize; bucket++){
+	for (size_t bucket = 0; bucket < tsize; bucket++){
 		for (auto entry : table[bucket]){
 			int newbucket = hfunc(entry.first) % new_size;
 			newtable[newbucket][entry.first] = entry.second;
