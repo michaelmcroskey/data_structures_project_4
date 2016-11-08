@@ -85,8 +85,8 @@ void            ChainedMap::resize(const size_t new_size) {
 	}
 	
     // copy all entries from old table to new table
+	delete [] table;
 	table = newtable;
-	delete [] newtable;
 	
 	tsize = new_size;
 }
