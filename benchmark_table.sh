@@ -4,7 +4,7 @@
 
 printf "| BACKEND              | NITEMS     | INSERT     | SEARCH     |\n"
 printf "|----------------------|------------|------------|------------|\n"
-for (( NITEMS=1; NITEMS<=10000000; NITEMS*=10 ))
+for (( NITEMS=10; NITEMS<=10000000; NITEMS*=10 ))
 do  
 	for BACKEND in unsorted sorted bst rbtree treap chained open
 	do

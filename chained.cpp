@@ -29,10 +29,7 @@ ChainedMap::~ChainedMap(){
 void            ChainedMap::insert(const std::string &key, const std::string &value) {
     n_items++;
     
-    if (n_items >= tsize)
-        resize(tsize*2);
-
-	double loadFactor = n_items / tsize;
+	double loadFactor = (double)n_items / tsize;
 	if (loadFactor > lfactor)
 		resize(2*tsize);
     

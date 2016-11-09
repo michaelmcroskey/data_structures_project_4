@@ -31,7 +31,7 @@ void            OpenMap::insert(const std::string &key, const std::string &value
     if (n_items >= tsize)
         resize(2*tsize);
 
-    double loadFactor = n_items / tsize;
+    double loadFactor = (double)n_items / tsize;
     if (loadFactor > lfactor)
         resize(2*tsize);
     
@@ -91,6 +91,7 @@ void            OpenMap::resize(const size_t new_size) {
 
     // allocate new table of size new_size
     table = new Entry[tsize];
+    n_items=0;
 
     for(size_t i = 0; i < tsize; i++)
         table[i] = NONE;

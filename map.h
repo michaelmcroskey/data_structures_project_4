@@ -124,7 +124,7 @@ private:
             std::map<std::string, std::string> *table;
             StringHasher    hfunc;
             size_t          tsize;
-            int             lfactor;
+            double          lfactor;
             size_t          n_items;
 };
 
@@ -142,7 +142,7 @@ private:
             StringHasher    hfunc2;
             Entry * table;
             size_t tsize;
-            int lfactor;
+            double lfactor;
             size_t n_items;
 };
 
