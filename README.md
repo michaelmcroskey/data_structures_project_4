@@ -50,6 +50,7 @@ Questions
 | 	           bst |         10 |     0.0000 |     0.0000 |
 | 	        rbtree |         10 |     0.0000 |     0.0000 |
 | 	         treap |         10 |     0.0001 |     0.0000 |
+|        unordered |         10 |     0.0010 |     0.0000 |
 | 	 chained-0.500 |         10 |     0.0000 |     0.0000 |
 | 	 chained-0.750 |         10 |     0.0000 |     0.0000 |
 | 	 chained-1.000 |         10 |     0.0000 |     0.0000 |
@@ -67,6 +68,7 @@ Questions
 | 	           bst |        100 |     0.0002 |     0.0001 |
 | 	        rbtree |        100 |     0.0002 |     0.0001 |
 | 	         treap |        100 |     0.0002 |     0.0001 |
+|        unordered |        100 |     0.0001 |     0.0000 |
 | 	 chained-0.500 |        100 |     0.0001 |     0.0001 |
 | 	 chained-0.750 |        100 |     0.0001 |     0.0001 |
 | 	 chained-1.000 |        100 |     0.0001 |     0.0001 |
@@ -84,6 +86,7 @@ Questions
 | 	           bst |       1000 |     0.0016 |     0.0014 |
 | 	        rbtree |       1000 |     0.0017 |     0.0008 |
 | 	         treap |       1000 |     0.0013 |     0.0011 |
+|        unordered |       1000 |     0.0007 |     0.0004 |
 | 	 chained-0.500 |       1000 |     0.0010 |     0.0005 |
 | 	 chained-0.750 |       1000 |     0.0012 |     0.0005 |
 | 	 chained-1.000 |       1000 |     0.0006 |     0.0006 |
@@ -101,6 +104,7 @@ Questions
 | 	           bst |      10000 |     0.0184 |     0.0175 |
 | 	        rbtree |      10000 |     0.0188 |     0.0097 |
 | 	         treap |      10000 |     0.0179 |     0.0179 |
+|        unordered |      10000 |     0.0069 |     0.0035 |
 | 	 chained-0.500 |      10000 |     0.0168 |     0.0071 |
 | 	 chained-0.750 |      10000 |     0.0126 |     0.0070 |
 | 	 chained-1.000 |      10000 |     0.0141 |     0.0049 |
@@ -118,6 +122,7 @@ Questions
 | 	           bst |     100000 |     0.2527 |     0.2257 |
 | 	        rbtree |     100000 |     0.2496 |     0.1217 |
 | 	         treap |     100000 |     0.1898 |     0.2036 |
+|        unordered |     100000 |     0.0730 |     0.0521 |
 | 	 chained-0.500 |     100000 |     0.1708 |     0.0704 |
 | 	 chained-0.750 |     100000 |     0.2389 |     0.0637 |
 | 	 chained-1.000 |     100000 |     0.1755 |     0.0671 |
@@ -135,6 +140,7 @@ Questions
 | 	           bst |    1000000 |     2.9996 |     2.8059 |
 | 	        rbtree |    1000000 |     3.0514 |     1.4122 |
 | 	         treap |    1000000 |     2.5333 |     2.4359 |
+|        unordered |    1000000 |     0.9538 |     0.6105 |
 | 	 chained-0.500 |    1000000 |     1.7828 |     0.7491 |
 | 	 chained-0.750 |    1000000 |     2.2658 |     0.7812 |
 | 	 chained-1.000 |    1000000 |     1.7532 |     0.8099 |
@@ -152,6 +158,7 @@ Questions
 | 	           bst |   10000000 |    33.0250 |    33.6250 |
 | 	        rbtree |   10000000 |    30.5560 |    14.5780 |
 | 	         treap |   10000000 |    25.7080 |    28.8740 |
+|        unordered |   10000000 |     9.7905 |     6.6894 |
 | 	 chained-0.500 |   10000000 |    27.0820 |     8.1496 |
 | 	 chained-0.750 |   10000000 |    22.4870 |     8.9494 |
 | 	 chained-1.000 |   10000000 |    27.6030 |     9.2237 |
@@ -165,14 +172,35 @@ Questions
 | 	      open-0.9 |   10000000 |    17.8130 |     6.2004 |
 | 	      open-1.0 |   10000000 |        inf |        inf |
 
-NOTE for Troy/David: run ./benchmark_table.sh to produce outputted table
 
 **3) Using frequencies, compute the word count on at least three texts from Project Gutenberg using all eight different backends. Record the elapsed time and memory usage of each experiment in a Markdown table:**
 
-| Backend     | Text                  | File Size | Elasped Time  | Memory    |
+| Backend     | Text                  | File Size | Time (seconds)| Mem  (Mb) |
 |-------------|-----------------------|-----------|---------------|-----------|
-| Unsorted    | Beowulf.txt           | 0         | 0             |           |
-| ...         | ...                   | ...       | ...           | ...       |
+|    unsorted |               Beo.txt |      294K |         6.271 |  2.117188 |
+|      sorted |               Beo.txt |      294K |        12.902 |  2.167969 |
+|         bst |               Beo.txt |      294K |         0.182 |  1.796875 |
+|      rbtree |               Beo.txt |      294K |         0.168 |  1.753906 |
+|       treap |               Beo.txt |      294K |         0.204 |  1.785156 |
+|   unordered |               Beo.txt |      294K |         0.115 |  1.761719 |
+|     chained |               Beo.txt |      294K |         0.136 |  5.992188 |
+|        open |               Beo.txt |      294K |         0.115 |  3.789062 |
+|    unsorted |              Tale.txt |      788K |        21.373 |  3.230469 |
+|      sorted |              Tale.txt |      788K |        59.915 |  3.265625 |
+|         bst |              Tale.txt |      788K |         0.534 |  2.382812 |
+|      rbtree |              Tale.txt |      788K |         0.492 |  2.347656 |
+|       treap |              Tale.txt |      788K |         0.587 |  2.355469 |
+|   unordered |              Tale.txt |      788K |         0.313 |  2.468750 |
+|     chained |              Tale.txt |      788K |         0.378 | 16.355469 |
+|        open |              Tale.txt |      788K |         0.320 | 12.777344 |
+|    unsorted |               Mis.txt |      3.2M |       191.403 |  6.292969 |
+|      sorted |               Mis.txt |      3.2M |       728.664 |  6.343750 |
+|         bst |               Mis.txt |      3.2M |         2.111 |  5.031250 |
+|      rbtree |               Mis.txt |      3.2M |         2.050 |  5.007812 |
+|       treap |               Mis.txt |      3.2M |         2.489 |  5.031250 |
+|   unordered |               Mis.txt |      3.2M |         1.199 |  5.750000 |
+|     chained |               Mis.txt |      3.2M |         1.484 | 56.804688 |
+|        open |               Mis.txt |      3.2M |         1.296 | 48.808594 |
 
 **4) After you have performed your benchmarks:**
 
@@ -190,6 +218,6 @@ Individual Group Contributions
 
 **Troy Prince** (tprince): 
 
-**David Mellitt** (dmellitt):
+**David Mellitt** (dmellitt): open.cpp, debugging, README
 
 
