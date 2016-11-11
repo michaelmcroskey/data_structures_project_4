@@ -205,8 +205,12 @@ Questions
 **4) After you have performed your benchmarks:**
 
 - Discuss the relative performance of each of the new map implementation and try to explain the differences.
+For insert, the data shows that unordered worked the best, then openned, then chained.  For search, openned worked the best, then unordered, then chained.  This is interesting because chained is actually supposed to have the best big-O complexity, but oppened and unordered tend to be faster. 
+
 
 - What effect did NITEMS, load factor, and File Size have on the performance of each hash table backend in your experiments in terms of execution time and memory usage?
+
+
 
 - In your opinion, which of the eight map backends is the best? Justify your conclusion by examining the trade-offs for the chosen backend and based on your experimental results.
 
@@ -216,7 +220,7 @@ Individual Group Contributions
 
 **Michael McRoskey** (mmcrosk1): Implemented unordered.cpp. Worked on map.h, chained.cpp, map_bench.cpp, frequencies.cpp, and made a benchmark_table.sh script for README.md.
 
-**Troy Prince** (tprince): 
+**Troy Prince** (tprince): README
 
 **David Mellitt** (dmellitt): open.cpp, debugging, README
 
