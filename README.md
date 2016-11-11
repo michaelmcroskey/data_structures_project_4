@@ -183,37 +183,47 @@ Questions
 |      rbtree |               Beo.txt |      294K |         0.168 |  1.753906 |
 |       treap |               Beo.txt |      294K |         0.204 |  1.785156 |
 |   unordered |               Beo.txt |      294K |         0.115 |  1.761719 |
-|     chained |               Beo.txt |      294K |         0.136 |  5.992188 |
-|        open |               Beo.txt |      294K |         0.115 |  3.789062 |
+|     chained |               Beo.txt |      294K |         0.143 |  1.816406 |
+|        open |               Beo.txt |      294K |         0.123 |  2.304688 |
 |    unsorted |              Tale.txt |      788K |        21.373 |  3.230469 |
 |      sorted |              Tale.txt |      788K |        59.915 |  3.265625 |
 |         bst |              Tale.txt |      788K |         0.534 |  2.382812 |
 |      rbtree |              Tale.txt |      788K |         0.492 |  2.347656 |
 |       treap |              Tale.txt |      788K |         0.587 |  2.355469 |
 |   unordered |              Tale.txt |      788K |         0.313 |  2.468750 |
-|     chained |              Tale.txt |      788K |         0.378 | 16.355469 |
-|        open |              Tale.txt |      788K |         0.320 | 12.777344 |
+|     chained |              Tale.txt |      788K |         0.425 |  2.402344 |
+|        open |              Tale.txt |      788K |         0.346 |  3.820312 |
 |    unsorted |               Mis.txt |      3.2M |       191.403 |  6.292969 |
 |      sorted |               Mis.txt |      3.2M |       728.664 |  6.343750 |
 |         bst |               Mis.txt |      3.2M |         2.111 |  5.031250 |
 |      rbtree |               Mis.txt |      3.2M |         2.050 |  5.007812 |
 |       treap |               Mis.txt |      3.2M |         2.489 |  5.031250 |
 |   unordered |               Mis.txt |      3.2M |         1.199 |  5.750000 |
-|     chained |               Mis.txt |      3.2M |         1.484 | 56.804688 |
-|        open |               Mis.txt |      3.2M |         1.296 | 48.808594 |
+|     chained |               Mis.txt |      3.2M |         1.791 |  5.039062 |
+|        open |               Mis.txt |      3.2M |         1.362 |  6.828125 |
 
 **4) After you have performed your benchmarks:**
 
 - Discuss the relative performance of each of the new map implementation and try to explain the differences.
-For insert, the data shows that unordered worked the best, then openned, then chained.  For search, openned worked the best, then unordered, then chained.  This is interesting because chained is actually supposed to have the best big-O complexity, but oppened and unordered tend to be faster. 
+
+For insert, the data shows that unordered worked the best, then open, then chained.  For search, open worked the best, 
+then unordered, then chained.  This is interesting because chained is actually supposed to have the best big-O complexity, 
+but open and unordered tend to be faster. 
 
 
 - What effect did NITEMS, load factor, and File Size have on the performance of each hash table backend in your experiments in terms of execution time and memory usage?
 
-
+As NITEMS increased, unordered's relative performance improved while chained's relative performance suffered. In general,
+chained improved as load factor increased until NITEMS was greater than 100000. Past that, chained took 2x as long to insert
+and 1.5x as long to search when lfactor changed from 10 to 100. Open was usually best around 0.6. At large values of NITEMS,
+open slowed considerably as lfactor approached 1. For the files, execution time for all three was proportional to file size.
+Memory use did not grow much because After a certain number of words are inserted from the book, most of the rest are probably
+repeat words. Unordered and chained used about the same; open used slightly more.
 
 - In your opinion, which of the eight map backends is the best? Justify your conclusion by examining the trade-offs for the chosen backend and based on your experimental results.
 
+Unordered is the best. It almost always had the best insertion time and memory usage. In the benchmarks, it was only
+slightly beaten by open in search time.
 
 Individual Group Contributions
 ------------------------------
