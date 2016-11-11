@@ -26,18 +26,16 @@ OpenMap::~OpenMap(){
 }
 
 void            OpenMap::insert(const std::string &key, const std::string &value) {
-    n_items++;
-    
-    if (n_items >= tsize)
-        resize(2*tsize);
+    size_t bucket = locate(key);
+    if(table[bucket]==NONE)
+        n_items++;
+
+    table[bucket].first = key;
+    table[bucket].second = value;
 
     double loadFactor = (double)n_items / tsize;
     if (loadFactor > lfactor)
         resize(2*tsize);
-    
-    size_t bucket = locate(key);
-    table[bucket].first = key;
-    table[bucket].second = value;
 
     if (DEBUG) std::cout << "Inserted " << key << "::" << value << std::endl;
 }

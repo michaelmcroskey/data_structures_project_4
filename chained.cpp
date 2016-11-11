@@ -27,14 +27,16 @@ ChainedMap::~ChainedMap(){
 }
 
 void            ChainedMap::insert(const std::string &key, const std::string &value) {
-    n_items++;
-    
-	double loadFactor = (double)n_items / tsize;
-	if (loadFactor > lfactor)
-		resize(2*tsize);
     
     size_t bucket = hfunc(key) % tsize;
-    	table[bucket][key] = value;
+    size_t old_size = table[bucket].size();
+    table[bucket][key] = value;
+    if(table[bucket].size()!=old_size){
+        n_items++;
+	    double loadFactor = (double)n_items / tsize;
+	    if (loadFactor > lfactor)
+		    resize(2*tsize);
+    }
 
 	if (DEBUG) std::cout << "Inserted " << key << "::" << value << std::endl;
 }
